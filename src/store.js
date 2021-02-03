@@ -1,7 +1,10 @@
 import { createStore } from 'redux'
 
 const initialState = {
-   articles: []
+   articles: [],
+   modalView: {
+      addArticle: false,
+   }
 };
 
 const reducer = (state = initialState, action) => {
@@ -9,7 +12,19 @@ const reducer = (state = initialState, action) => {
       case 'PUSH_ARTICLES':
          return {
             ...state,
-            articles: [action.payload]
+            articles: [...state.articles, ...action.payload]
+         }
+      case 'FILTER_ARTICLES':
+         return {
+            ...state,
+            articles: [...action.payload]
+         }
+      case 'OPENMODAL_ADDARTICLE':
+         return {
+            ...state,
+            modalView: {
+               addArticle: true,
+            }
          }
       default: return state;
    }
